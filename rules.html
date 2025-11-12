@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gdynia RP | Regulamin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Zmienne CSS dla Trybów Ciemny/Jasny */
+        :root {
+            --bg-color: #E0E5EC; 
+            --text-color: #333333;
+            --accent-color: #4C76FF;
+            --card-color: #E0E5EC;
+            --shadow-light: #f7ffff;
+            --shadow-dark: #c9cfd6;
+            --footer-bg: #DDE5F0;
+        }
+
+        /* Tryb Ciemny */
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #E6E6E6;
+            --accent-color: #4C76FF;
+            --card-color: #272727;
+            --shadow-light: #303030;
+            --shadow-dark: #111111;
+            --footer-bg: #111111;
+        }
+
+        /* GLOBALNE STYLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* NAWIGACJA */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color);
+            padding: 15px 40px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-radius: 0 0 15px 15px;
+        }
+        .nav-logo {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+        .nav-links { display: flex; }
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); 
+            color: var(--accent-color);
+            background-color: var(--card-color);
+        }
+
+        /* PRZEŁĄCZNIK TRYBU */
+        .theme-toggle {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            margin-left: 20px;
+            border-radius: 50%;
+            background-color: var(--card-color);
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: var(--accent-color);
+        }
+        .theme-toggle:active {
+            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light); 
+        }
+
+        /* SEKCJA TREŚCI */
+        .content-container {
+            padding: 80px 40px;
+            background-color: var(--bg-color);
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .content-title {
+            font-size: 2.5em;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .rule-section {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+            padding: 40px;
+        }
+        .rule-list { list-style-type: none; padding: 0; }
+        .rule-list li { 
+            margin-bottom: 8px; 
+            padding-left: 10px; 
+            position: relative; 
+            color: var(--text-color); 
+            opacity: 0.9;
+            text-align: left; /* Wyrównanie listy do lewej */
+        }
+        .rule-list li::before {
+            content: '●'; 
+            color: #ff0000; 
+            font-weight: bold; 
+            display: inline-block; 
+            width: 1em; 
+            margin-left: -1em;
+        }
+        .rule-list li strong { color: var(--accent-color); font-weight: 700; }
+
+        /* STOPKA */
+        .footer {
+            padding: 30px 40px;
+            background-color: var(--footer-bg);
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--text-color);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; flex-direction: column; }
+            .nav-links { margin-top: 15px; }
+            .content-container { padding: 40px 20px; }
+            .rule-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">GDYNIA RP</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">🏠 START</a>
+            <a href="factions.html" class="nav-link">👮 FRAKCJE</a>
+            <a href="admin.html" class="nav-link">⭐ ADMIN</a>
+            <a href="rules.html" class="nav-link active">📜 REGULAMINY</a>
+            <a href="https://discord.gg/kSkdaGkDV6" target="_blank" class="nav-link">💬 DISCORD</a>
+            <div id="theme-toggle" class="theme-toggle">
+                <span id="theme-icon">🌙</span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="content-container" style="padding: 60px 20px; max-width: 1000px; margin: auto;">
+        <h2 class="content-title">📜 PEŁNY REGULAMIN SERWERA GDYNIA RP</h2>
+        
+        <div class="rule-section info-card" style="box-shadow: none; text-align: left; padding: 40px;">
+            <p style="text-align: center; font-weight: 600; color: #ff0000;">
+                Witaj na oficjalnym serwerze Gdynia RP! Nieznajomość zasad nie zwalnia z odpowiedzialności.
+            </p>
+
+            <h3 style="color: #4C76FF; border-bottom: 2px solid var(--shadow-dark); padding-bottom: 5px;">1. Zasady ogólne</h3>
+            <ul class="rule-list">
+                <li>Zachowuj kulturę osobistą – szanuj innych graczy i administrację.</li>
+                <li>Zakaz obrażania, prowokowania i wyśmiewania innych użytkowników.</li>
+                <li>Zakaz używania wulgaryzmów, treści NSFW oraz tematów politycznych i religijnych.</li>
+                <li>Reklamowanie innych serwerów, gier lub społeczności jest zabronione.</li>
+                <li>Nie spamuj, nie flooduj czatu ani kanałów głosowych.</li>
+                <li>Podszywanie się pod administrację, służby lub innych graczy jest karane.</li>
+                <li>Decyzje administracji są ostateczne – nie dyskutujemy z nimi publicznie.</li>
+                <li>Każdy gracz ma obowiązek znać i przestrzegać regulaminu.</li>
+            </ul>
+
+            <h3 style="color: #4C76FF; border-bottom: 2px solid var(--shadow-dark); padding-bottom: 5px; margin-top: 30px;">2. Zasady RolePlay (RP)</h3>
+            <ul class="rule-list">
+                <li>Odgrywaj postać w sposób realistyczny i logiczny.</li>
+                <li>Zakaz **RDM** – zabijania bez powodu RP.</li>
+                <li>Zakaz **VDM** – rozjeżdżania innych bez uzasadnienia RP.</li>
+                <li>**FailRP** – zakazane są czynności nielogiczne (np. skakanie po dachu w pożarze).</li>
+                <li>**MG** – zakaz używania informacji spoza gry w świecie RP.</li>
+                <li>**PG** – zakaz zmuszania graczy do akcji RP lub wykonywania niemożliwych rzeczy.</li>
+                <li>**CL** – wychodzenie z gry podczas akcji RP to poważne przewinienie.</li>
+                <li>**FearRP** – każda postać musi odczuwać strach w sytuacjach zagrożenia życia.</li>
+                <li>Nie przerywaj akcji RP bez powodu.</li>
+                <li>Akcje RP muszą być logiczne i zgodne z zasadami zdrowego rozsądku.</li>
+            </ul>
+            
+            <h3 style="color: #4C76FF; border-bottom: 2px solid var(--shadow-dark); padding-bottom: 5px; margin-top: 30px;">8. Kary i konsekwencje (Skrót)</h3>
+            <ul class="rule-list">
+                <li>Kary obejmują: Upomnienie słowne, Ostrzeżenie, Kick, **Tymczasowy Ban** oraz **Permanentny Ban** za ciężkie naruszenia.</li>
+                <li>Omijanie kary (np. alt kontem) skutkuje permbanem.</li>
+                <li>Administracja może dostosować karę do sytuacji i ma prawo interpretować zasady.</li>
+            </ul>
+
+            <p style="text-align: center; margin-top: 40px;">
+                Pełna lista zasad (w tym Pojazdy, Służby i Zasady Techniczne) jest dostępna na naszym Discordzie.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <a href="https://www.youtube.com/@gdyniarp" target="_blank">YOUTUBE</a> | 
+        <a href="https://www.tiktok.com/@gdyniarpeh" target="_blank">TIKTOK</a> | 
+        <a href="rules.html">REGULAMIN</a>
+        <p>&copy; 2025 Gdynia RP. Strona wykonana przez: oskubvny.</p>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        // Ładowanie preferencji z localStorage
+        const loadTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                icon.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-mode');
+                icon.textContent = '🌙';
+            }
+        };
+
+        // Zmiana trybu
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            let currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme);
+
+            icon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // Wczytaj motyw przy ładowaniu strony
+        document.addEventListener('DOMContentLoaded', loadTheme);
+    </script>
+
+</body>
+</html>

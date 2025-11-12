@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gdynia RP | Frakcje i Rekrutacja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Zmienne CSS dla Trybów Ciemny/Jasny */
+        :root {
+            --bg-color: #E0E5EC; /* Jasne tło */
+            --text-color: #333333;
+            --accent-color: #4C76FF;
+            --card-color: #E0E5EC;
+            --shadow-light: #f7ffff;
+            --shadow-dark: #c9cfd6;
+            --footer-bg: #DDE5F0;
+        }
+
+        /* Tryb Ciemny */
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #E6E6E6;
+            --accent-color: #4C76FF;
+            --card-color: #272727;
+            --shadow-light: #303030;
+            --shadow-dark: #111111;
+            --footer-bg: #111111;
+        }
+
+        /* GLOBALNE STYLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* NAWIGACJA */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color);
+            padding: 15px 40px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-radius: 0 0 15px 15px;
+        }
+        .nav-logo {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); 
+            color: var(--accent-color);
+            background-color: var(--card-color);
+        }
+
+        /* PRZEŁĄCZNIK TRYBU */
+        .theme-toggle {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            margin-left: 20px;
+            border-radius: 50%;
+            background-color: var(--card-color);
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: var(--accent-color);
+        }
+        .theme-toggle:active {
+            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light); 
+        }
+
+        /* SEKCJA TREŚCI */
+        .content-container {
+            padding: 80px 40px;
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+        .content-title {
+            font-size: 2.5em;
+            color: var(--text-color);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        /* STYLE SPECYFICZNE DLA FRAKCJI (NOWY WYGLĄD) */
+        .factions-container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .faction-card {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .faction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+        }
+        .faction-card h3 {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin: 0 0 10px 0;
+            line-height: 1.2;
+        }
+        .faction-card p {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+        .recruitment-status {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .status-tag {
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8em;
+            margin: 5px;
+            box-shadow: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+            transition: all 0.3s;
+        }
+        .tag-open, .tag-rozszerzona, .tag-podstawowa {
+            background-color: #4CAF50; /* Zielony */
+            color: white;
+        }
+        .tag-closed {
+            background-color: #F44336; /* Czerwony */
+            color: white;
+        }
+        .btn-more {
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .btn-more:hover {
+            opacity: 0.9;
+            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
+        }
+        /* Style dla grupy przycisków w PSP */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn-half {
+            flex: 1 1 45%; 
+            padding: 10px 15px;
+            font-size: 0.8em;
+            text-align: center;
+        }
+        /* Sekcja nielegalna */
+        .illegal-factions {
+            margin-top: 80px;
+            padding: 40px;
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        }
+
+        /* STOPKA */
+        .footer {
+            padding: 30px 40px;
+            background-color: var(--footer-bg);
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--text-color);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; flex-direction: column; }
+            .nav-links { margin-top: 15px; }
+            .content-container { padding: 40px 20px; }
+            .factions-container {
+                grid-template-columns: 1fr;
+            }
+            .btn-half {
+                flex: 1 1 100%; /* Przyciski jeden pod drugim na małym ekranie */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">GDYNIA RP</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">🏠 START</a>
+            <a href="factions.html" class="nav-link active">👮 FRAKCJE</a>
+            <a href="admin.html" class="nav-link">⭐ ADMIN</a>
+            <a href="rules.html" class="nav-link">📜 REGULAMINY</a>
+            <a href="https://discord.gg/kSkdaGkDV6" target="_blank" class="nav-link">💬 DISCORD</a>
+            <div id="theme-toggle" class="theme-toggle">
+                <span id="theme-icon">🌙</span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="content-container">
+        <h2 class="content-title" style="margin-bottom: 30px;">👮 FRAKCJE PUBLICZNE I REKRUTACJA</h2>
+        
+        <div class="factions-container">
+            
+            <div class="faction-card">
+                <h3>POLICJA (KWP)</h3>
+                <p>Egzekwowanie prawa, patrole i ściganie przestępców w całym Trójmieście.</p>
+                <div class="recruitment-status">
+                    <span class="status-tag tag-open">REKRUTACJA OTWARTA</span>
+                </div>
+                <a href="https://forms.gle/NBBwFQtiV3kZikAT8" target="_blank" class="btn-more">WYPEŁNIJ WNIOSEK</a>
+            </div>
+
+            <div class="faction-card">
+                <h3>POGOTOWIE RATUNKOWE (EMS)</h3>
+                <p>Udzielanie pomocy medycznej i ratowanie życia. Zawsze na pierwszej linii.</p>
+                <div class="recruitment-status">
+                    <span class="status-tag tag-closed">REKRUTACJA ZAMKNIĘTA</span>
+                </div>
+                <a href="https://discord.gg/kSkdaGkDV6" target="_blank" class="btn-more" style="background-color: var(--shadow-dark); color: var(--text-color);">SPRAWDŹ NA DISCORDZIE</a>
+            </div>
+
+            <div class="faction-card">
+                <h3>STRAŻ POŻARNA (PSP)</h3>
+                <p>Dbamy o bezpieczeństwo i gasimy pożary. Zawsze gotowi do akcji.</p>
+                <div class="recruitment-status">
+                    <span class="status-tag tag-open">REKRUTACJA ROZSZERZONA</span>
+                    <span class="status-tag tag-open">REKRUTACJA PODSTAWOWA</span>
+                </div>
+                <div class="btn-group">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvhAiEQV_I9u9L_znL6zMzkk5QZGxdhA4sRkEI79_P67-W6A/viewform?usp=header" target="_blank" class="btn-more btn-half">WNIOSEK PODSTAWOWY</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiQ9X_BkebEhXz3Epqi-hk8VYRHzUxdTGKqcIX3IMk_EUHEA/viewform?usp=header" target="_blank" class="btn-more btn-half" style="background-color: var(--text-color); color: var(--bg-color);">WNIOSEK ROZSZERZONY</a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="illegal-factions">
+            <h2 class="content-title" style="margin-top: 0; margin-bottom: 20px;">⚫ FRAKCJE NIELEGALNE</h2>
+            <p style="font-size: 1.1em; opacity: 0.8; color: var(--text-color);">
+                Informacje o organizacjach przestępczych, mafiach i gangach są tajne. 
+                Aby dołączyć do życia podziemia, skontaktuj się z liderami frakcji na Discordzie.
+            </p>
+            <a href="https://discord.gg/kSkdaGkDV6" target="_blank" class="btn-more" style="width: auto; max-width: 300px;">DOŁĄCZ DO DISCORDA</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <a href="https://www.youtube.com/@gdyniarp" target="_blank">YOUTUBE</a> | 
+        <a href="https://www.tiktok.com/@gdyniarpeh" target="_blank">TIKTOK</a> | 
+        <a href="rules.html">REGULAMIN</a>
+        <p>&copy; 2025 Gdynia RP. Strona wykonana przez: oskubvny.</p>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+        const body = document.body;
+        
+        // Ładowanie preferencji z localStorage
+        const loadTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                icon.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-mode');
+                icon.textContent = '🌙';
+            }
+        };
+
+        // Zmiana trybu
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            let currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme);
+
+            icon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // Wczytaj motyw przy ładowaniu strony
+        document.addEventListener('DOMContentLoaded', loadTheme);
+    </script>
+</body>
+</html>

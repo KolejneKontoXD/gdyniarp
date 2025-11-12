@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gdynia RP | Zespół Zarządzający</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Zmienne CSS dla Trybów Ciemny/Jasny */
+        :root {
+            --bg-color: #E0E5EC; /* Jasne tło */
+            --text-color: #333333;
+            --accent-color: #4C76FF;
+            --card-color: #E0E5EC;
+            --shadow-light: #f7ffff;
+            --shadow-dark: #c9cfd6;
+            --footer-bg: #DDE5F0;
+        }
+
+        /* Tryb Ciemny */
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #E6E6E6;
+            --accent-color: #4C76FF;
+            --card-color: #272727;
+            --shadow-light: #303030;
+            --shadow-dark: #111111;
+            --footer-bg: #111111;
+        }
+
+        /* GLOBALNE STYLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color: 0.3s;
+        }
+
+        /* NAWIGACJA */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color);
+            padding: 15px 40px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-radius: 0 0 15px 15px;
+        }
+        .nav-logo {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+        .nav-links { display: flex; }
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); 
+            color: var(--accent-color);
+            background-color: var(--card-color);
+        }
+
+        /* PRZEŁĄCZNIK TRYBU */
+        .theme-toggle {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            margin-left: 20px;
+            border-radius: 50%;
+            background-color: var(--card-color);
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: var(--accent-color);
+        }
+        .theme-toggle:active {
+            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light); 
+        }
+
+        /* SEKCJA TREŚCI */
+        .content-container {
+            padding: 80px 40px;
+            background-color: var(--bg-color);
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .content-title {
+            font-size: 2.5em;
+            color: var(--text-color);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        .info-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .info-card {
+            width: 300px;
+            padding: 30px;
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+            transition: all 0.3s;
+        }
+        .info-card h3 {
+            color: var(--accent-color);
+            font-size: 1.6em; 
+            margin-top: 0;
+        }
+
+        /* STYLE ADMIN SPECYFICZNE */
+        .admin-container { text-align: center; }
+        .admin-avatar {
+            width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            background-size: cover; background-position: center; border: 4px solid var(--accent-color);
+        }
+        .role-title { 
+            font-weight: 800; 
+            color: var(--accent-color); 
+            margin-bottom: 5px;
+            font-size: 1em; 
+        }
+        .admin-detail { font-size: 0.9em; color: var(--text-color); opacity: 0.7; }
+        .admin-card { text-align: center; }
+        
+        /* STOPKA */
+        .footer {
+            padding: 30px 40px;
+            background-color: var(--footer-bg);
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--text-color);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; flex-direction: column; }
+            .nav-links { margin-top: 15px; }
+            .info-card { width: 100%; margin-bottom: 20px; }
+            .content-container { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">GDYNIA RP</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">🏠 START</a>
+            <a href="factions.html" class="nav-link">👮 FRAKCJE</a>
+            <a href="admin.html" class="nav-link active">⭐ ADMIN</a>
+            <a href="rules.html" class="nav-link">📜 REGULAMINY</a>
+            <a href="https://discord.gg/kSkdaGkDV6" target="_blank" class="nav-link">💬 DISCORD</a>
+            <div id="theme-toggle" class="theme-toggle">
+                <span id="theme-icon">🌙</span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="content-container">
+        <div class="admin-container">
+            <h2 class="content-title">⭐ NASZ TEAM ZARZĄDZAJĄCY</h2>
+            
+            <div class="info-grid">
+                
+                <div class="info-card admin-card">
+                    <div class="admin-avatar" style="background-image: url('mcpfp - oskubanybratku.png');"></div>
+                    <h3>Oskubvny</h3>
+                    <p class="role-title">PROJECT LEADER</p>
+                    <p class="admin-detail">Wizjoner i twórca projektu. Odpowiedzialny za strategiczne decyzje.</p>
+                </div>
+                
+                <div class="info-card admin-card">
+                    <div class="admin-avatar" style="background-image: url('qulekpfp.jpg');"></div>
+                    <h3>Qulek_PL</h3>
+                    <p class="role-title">CO-PROJECT LEADER</p>
+                    <p class="admin-detail">Współzarządzający serwerem. Nadzór nad frakcjami i administracją.</p>
+                </div>
+
+                <div class="info-card admin-card">
+                    <div class="admin-avatar" style="background-image: url('galejzapfp.jpg');"></div>
+                    <h3>Galejza</h3>
+                    <p class="role-title">V-PROJECT LEADER</p>
+                    <p class="admin-detail">Wice-Lider projektu. Wsparcie w zarządzaniu zasobami i społecznością.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <a href="https://www.youtube.com/@gdyniarp" target="_blank">YOUTUBE</a> | 
+        <a href="https://www.tiktok.com/@gdyniarpeh" target="_blank">TIKTOK</a> | 
+        <a href="rules.html">REGULAMIN</a>
+        <p>&copy; 2025 Gdynia RP. Strona wykonana przez: oskubvny.</p>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        // Ładowanie preferencji z localStorage
+        const loadTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                icon.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-mode');
+                icon.textContent = '🌙';
+            }
+        };
+
+        // Zmiana trybu
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            let currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme);
+
+            icon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // Wczytaj motyw przy ładowaniu strony
+        document.addEventListener('DOMContentLoaded', loadTheme);
+    </script>
+
+</body>
+</html>
