@@ -1,138 +1,279 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GdyniaRP — Projekt RolePlay</title>
-  <meta name="description" content="GdyniaRP — polski serwer RolePlay. Dołącz do frakcji, poznaj zasady i wejdź do gry!" />
-  <style>
-    :root{
-      --bg:#0b0f14;
-      --card:#0f1620;
-      --muted:#98a0ac;
-      --accent:#0ea5e9;
-      --accent-2:#60a5fa;
-      --glass: rgba(255,255,255,0.03);
-      --radius:14px;
-      --maxw:1100px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #07101a 0%, #07121a 60%), var(--bg);
-      color:#e6eef6;
-      line-height:1.45;
-    }
-    .wrap{max-width:var(--maxw);margin:36px auto;padding:20px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:54px;height:54px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:flex;align-items:center;justify-content:center;font-weight:700;color:#021225;font-size:18px;
-    }
-    nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-weight:600}
-    nav a:hover{color:var(--accent)}
-    .hero{
-      margin-top:22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      padding:28px;border-radius:var(--radius);
-      display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center;
-    }
-    .hero h1{margin:0;font-size:34px;}
-    .lead{color:var(--muted);margin-top:8px}
-    .cta{margin-top:18px;display:flex;gap:12px}
-    .btn{
-      padding:10px 14px;border-radius:10px;font-weight:700;border:0;cursor:pointer;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021225;
-    }
-    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(255,255,255,0.04)}
-    .card{background:var(--card);padding:16px;border-radius:12px;}
-    .sections{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:20px}
-    section h2{margin-top:0}
-    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px}
-    footer{margin-top:28px;padding:16px;border-radius:10px;background:transparent;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-    @media (max-width:920px){.hero,.sections{grid-template-columns:1fr}nav{display:none}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gdynia RP | Najlepsze RP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Zmienne CSS dla Trybów Ciemny/Jasny */
+        :root {
+            --bg-color: #E0E5EC; /* Jasne tło */
+            --text-color: #333333;
+            --accent-color: #4C76FF;
+            --card-color: #E0E5EC;
+            --shadow-light: #f7ffff;
+            --shadow-dark: #c9cfd6;
+            --footer-bg: #DDE5F0;
+        }
+
+        /* Tryb Ciemny */
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #E6E6E6;
+            --accent-color: #4C76FF;
+            --card-color: #272727;
+            --shadow-light: #303030;
+            --shadow-dark: #111111;
+            --footer-bg: #111111;
+        }
+
+        /* GLOBALNE STYLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* NAWIGACJA */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color);
+            padding: 15px 40px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-radius: 0 0 15px 15px;
+        }
+        .nav-logo {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+        .nav-links { display: flex; }
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); 
+            color: var(--accent-color);
+            background-color: var(--card-color);
+        }
+
+        /* PRZEŁĄCZNIK TRYBU */
+        .theme-toggle {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            margin-left: 20px;
+            border-radius: 50%;
+            background-color: var(--card-color);
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: var(--accent-color);
+        }
+        .theme-toggle:active {
+            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light); 
+        }
+
+        /* SEKCJA HERO */
+        .hero-section {
+            padding: 150px 40px;
+            text-align: center;
+            background-color: var(--bg-color);
+        }
+        .main-title {
+            font-size: 4em;
+            font-weight: 800;
+            color: var(--text-color);
+            margin: 0 0 10px 0;
+            text-shadow: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+        }
+        .subtitle {
+            font-size: 1.4em;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+        .call-to-action-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--card-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1em;
+            border-radius: 10px;
+            transition: all 0.3s;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        }
+        .call-to-action-btn:hover {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); 
+            background-color: var(--footer-bg);
+            color: var(--text-color);
+        }
+
+        /* SEKCJA TREŚCI */
+        .content-section {
+            padding: 80px 40px;
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+        .content-title {
+            font-size: 2.5em;
+            color: var(--text-color);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        .info-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .info-card {
+            width: 300px;
+            padding: 30px;
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+            text-align: left;
+            transition: all 0.3s;
+        }
+        .info-card h3 {
+            color: var(--accent-color);
+            font-size: 1.4em;
+            margin-top: 0;
+        }
+        
+        /* STOPKA */
+        .footer {
+            padding: 30px 40px;
+            background-color: var(--footer-bg);
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--text-color);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; flex-direction: column; }
+            .nav-links { margin-top: 15px; }
+            .hero-section { padding: 100px 20px; }
+            .main-title { font-size: 3em; }
+            .subtitle { font-size: 1.1em; }
+            .info-card { width: 100%; margin-bottom: 20px; }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo">GdRP</div>
-        <div>
-          <div style="font-weight:800">GdyniaRP</div>
-          <div class="muted" style="font-size:13px">Polski projekt RolePlay — serwery, społeczność, wydarzenia</div>
-        </div>
-      </div>
-      <nav>
-        <a href="#o-projekcie">O projekcie</a>
-        <a href="#frakcje">Frakcje</a>
-        <a href="#zasady">Zasady</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-    </header>
 
-    <main>
-      <section class="hero card">
-        <div>
-          <h1>Witaj w <span style="color:var(--accent)">GdyniaRP</span></h1>
-          <p class="lead">Dołącz do realistycznego świata RolePlay inspirowanego miastem Gdynia. Whitelist, misje, frakcje i wydarzenia społecznościowe.</p>
-          <div class="cta">
-            <button class="btn">Dołącz na Discord</button>
-            <button class="btn ghost">Zasady i rejestracja</button>
-          </div>
+    <nav class="navbar">
+        <div class="nav-logo">GDYNIA RP</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link active">🏠 START</a>
+            <a href="factions.html" class="nav-link">👮 FRAKCJE</a>
+            <a href="admin.html" class="nav-link">⭐ ADMIN</a>
+            <a href="rules.html" class="nav-link">📜 REGULAMINY</a>
+            <a href="https://discord.gg/kSkdaGkDV6" target="_blank" class="nav-link">💬 DISCORD</a>
+            <div id="theme-toggle" class="theme-toggle">
+                <span id="theme-icon">🌙</span>
+            </div>
         </div>
-      </section>
+    </nav>
 
-      <div class="sections">
-        <section class="card" id="o-projekcie">
-          <h2>O projekcie</h2>
-          <p class="muted">GdyniaRP to polski serwer RolePlay skupiający się na realistycznej rozgrywce i współpracy między graczami.</p>
+    <section class="content-container">
+        
+        <section class="hero-section">
+            <div class="hero-content">
+                <p class="main-title">NOWY POCZĄTEK GDYNI</p>
+                <p class="subtitle">Wymagający, czysty i profesjonalny RolePlay w Emergency Hamburg.</p>
+                <a href="https://discord.gg/kSkdaGkDV6" target="_blank" class="call-to-action-btn">
+                    DOŁĄCZ TERAZ
+                </a>
+            </div>
         </section>
 
-        <aside class="card" id="frakcje">
-          <h3>Frakcje</h3>
-          <ul>
-            <li>Policja</li>
-            <li>Straż Pożarna</li>
-            <li>EMS</li>
-            <li>Frakcje cywilne</li>
-          </ul>
-        </aside>
-      </div>
+        <section class="content-section">
+            <h2 class="content-title">CO BUDUJEMY?</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>01. CZYSTE RP</h3>
+                    <p>Nasz nacisk na rygorystyczne przestrzeganie zasad i eliminację MG tworzy immersyjne doświadczenie.</p>
+                </div>
+                <div class="info-card">
+                    <h3>02. TEAM Z WIZJĄ</h3>
+                    <p>Transparentna i doświadczona administracja, która dba o graczy i ma jasną wizję rozwoju serwera.</p>
+                </div>
+                <div class="info-card">
+                    <h3>03. TWOJA WŁASNOŚĆ</h3>
+                    <p>Masz realny wpływ na serwer. Zachęcamy do tworzenia własnych historii, frakcji i biznesów od podstaw.</p>
+                </div>
+            </div>
+        </section>
 
-      <section class="card" id="zasady" style="margin-top:18px">
-        <h2>Zasady</h2>
-        <p class="muted">Podstawowe zasady RolePlay obowiązujące na serwerze.</p>
-        <ul>
-          <li>Brak metagamingu / powergamigu</li>
-          <li>Szacunek wobec innych graczy</li>
-          <li>Realizm i odgrywanie postaci</li>
-        </ul>
-      </section>
+    </section>
 
-      <section class="card" style="margin-top:18px">
-        <h2>Galeria</h2>
-        <div class="gallery">
-          <img src="https://source.unsplash.com/collection/190727/800x600" alt="screenshot1">
-          <img src="https://source.unsplash.com/collection/190727/801x600" alt="screenshot2">
-          <img src="https://source.unsplash.com/collection/190727/802x600" alt="screenshot3">
-        </div>
-      </section>
+    <footer class="footer">
+        <a href="https://www.youtube.com/@gdyniarp" target="_blank">YOUTUBE</a> | 
+        <a href="https://www.tiktok.com/@gdyniarpeh" target="_blank">TIKTOK</a> | 
+        <a href="rules.html">REGULAMIN</a>
+        <p>&copy; 2025 Gdynia RP. Strona wykonana przez: oskubvny.</p>
+    </footer>
 
-      <section class="card" id="kontakt" style="margin-top:18px">
-        <h2>Kontakt</h2>
-        <p class="muted">Dołącz do naszego Discorda, aby rozpocząć przygodę z GdyniaRP!</p>
-        <p><strong>Discord:</strong> <a href="#">LINK_DO_DISCORD</a></p>
-        <p><strong>Mail:</strong> kontakt@gdyniarp.example</p>
-      </section>
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+        const body = document.body;
 
-      <footer>
-        <div>© GdyniaRP — projekt RolePlay</div>
-        <div class="muted">Zasady | Regulamin | Kontakt</div>
-      </footer>
-    </main>
-  </div>
+        // Ładowanie preferencji z localStorage
+        const loadTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                icon.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-mode');
+                icon.textContent = '🌙';
+            }
+        };
+
+        // Zmiana trybu
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            let currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme);
+
+            icon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // Wczytaj motyw przy ładowaniu strony
+        document.addEventListener('DOMContentLoaded', loadTheme);
+    </script>
+
 </body>
 </html>
