@@ -3,105 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administracyjny Gdynia RP</title>
+    <title>Panel Administracyjny - Gdynia RP</title>
     <link rel="stylesheet" href="style.css">
+    
     <style>
-        /* CSS DEDYKOWANY DLA PANELU ADMINA (Neumorphism i layout) */
-        
+        /* --- STYLE DLA SOFT UI ADMIN PANEL --- */
+
         body {
-            background-color: var(--background-color); /* Używa koloru tła z globalnego style.css */
+            background-color: var(--background-color);
             color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .admin-card {
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-dark), var(--shadow-light); /* Ciemny i jasny cień dla efektu Neumorphism */
-            background-color: var(--component-background);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all 0.2s ease-in-out;
         }
 
-        .admin-card:hover {
-            box-shadow: var(--inner-shadow-dark), var(--inner-shadow-light); /* Wklęsły cień przy najechaniu */
-            transform: translateY(-2px);
+        .dashboard-container {
+            width: 90%;
+            max-width: 1400px;
+            margin-top: 50px;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-dark), var(--shadow-light);
+            background-color: var(--component-background);
+            text-align: center;
         }
 
-        .admin-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            border: 5px solid var(--primary-color);
+        .dashboard-header {
+            color: var(--primary-color);
             margin-bottom: 20px;
-            box-shadow: var(--shadow-light);
+            font-size: 2.5em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
-        .admin-name {
-            font-size: 1.5em;
-            margin: 5px 0;
+        .stats-grid, .tools-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .tools-grid {
+            grid-template-columns: 1fr; /* Użyjemy jednej kolumny dla większych sekcji */
+        }
+
+        .neumorphism-card {
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: var(--shadow-dark), var(--shadow-light);
+            background-color: var(--component-background);
+            transition: all 0.3s ease;
+        }
+
+        .neumorphism-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-title {
+            color: var(--primary-color);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        /* Sekcja Narzędzi (Bany, Dowody) */
+        .tool-section {
+            text-align: left;
+        }
+
+        .tool-button {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1em;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease-in-out;
+            color: var(--text-color);
+            background-color: var(--component-background);
+            box-shadow: var(--shadow-dark), var(--shadow-light);
+        }
+
+        .tool-button:hover {
+            box-shadow: var(--inner-shadow-dark), var(--inner-shadow-light); /* Efekt wciśnięcia */
             color: var(--primary-color);
         }
 
-        .admin-role {
-            font-size: 1em;
-            color: var(--text-color-secondary);
+        .tool-button i {
+            margin-right: 15px;
+            font-size: 1.2em;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        </header>
+    
+    <div class="dashboard-container">
+        <h1 class="dashboard-header">PANEL ADMINISTRACYJNY</h1>
+        <p>Witaj z powrotem, Zweryfikowany Członku Administracji!</p>
 
-    <div class="container">
-        <h1>PANEL ADMINISTRACYJNY Gdynia RP</h1>
-        <p>Witaj, zweryfikowany administratorze! Poniżej znajduje się lista członków ekipy.</p>
+        <div class="stats-grid">
+            <div class="neumorphism-card">
+                <div class="card-title">Zarządzane Bany (Dzisiaj)</div>
+                <div class="stat-value">4</div>
+            </div>
+            <div class="neumorphism-card">
+                <div class="card-title">Aktywne Zgłoszenia</div>
+                <div class="stat-value">12</div>
+            </div>
+            <div class="neumorphism-card">
+                <div class="card-title">Ostatni Log Admina</div>
+                <div class="stat-value" style="font-size: 1.5em;">@oskubany</div>
+            </div>
+            <div class="neumorphism-card">
+                <div class="card-title">Aktywni Admini Online</div>
+                <div class="stat-value">3</div>
+            </div>
+        </div>
+
+        <div class="tools-grid">
+            <div class="neumorphism-card tool-section" style="margin-top: 30px;">
+                <h2 class="card-title">NARZĘDZIA ZARZĄDZANIA RP</h2>
+                
+                <h3 style="margin-top: 20px;">Zarządzanie Banami</h3>
+                <a href="#" class="tool-button">
+                    <i class="fas fa-hammer"></i> Nałóż Nowego Bana (Wymaga API Serwera)
+                </a>
+                <a href="#" class="tool-button">
+                    <i class="fas fa-list"></i> Lista Aktywnych Banów (Wymaga Bazy Danych)
+                </a>
+                <a href="#" class="tool-button">
+                    <i class="fas fa-user-check"></i> Wyszukaj Gracza po ID/Nicku
+                </a>
+
+                <h3 style="margin-top: 30px;">Zarządzanie Zgłoszeniami i Dowodami</h3>
+                <a href="#" class="tool-button">
+                    <i class="fas fa-file-alt"></i> Przejrzyj Nowe Zgłoszenia (Wymaga zewnętrznej platformy)
+                </a>
+                <a href="#" class="tool-button">
+                    <i class="fas fa-upload"></i> Wgraj Dowód do Bazy Danych
+                </a>
+                <a href="#" class="tool-button">
+                    <i class="fas fa-history"></i> Logi Administratorów
+                </a>
+            </div>
+        </div>
         
-        <div class="admin-grid">
-
-            <div class="admin-card">
-                <div class="admin-avatar" style="background-image: url('mcpfp - oskubanybratku.png');"></div>
-                <div class="admin-name">Oskubany</div>
-                <div class="admin-role">Właściciel / Główny Administrator</div>
-                <p style="margin-top: 15px;">Odpowiedzialny za wizję, rozwój i finanse projektu.</p>
-            </div>
-
-            <div class="admin-card">
-                <div class="admin-avatar" style="background-image: url('qulekpfp.jpg');"></div>
-                <div class="admin-name">Qulek</div>
-                <div class="admin-role">Administrator Społeczności</div>
-                <p style="margin-top: 15px;">Zajmuje się moderacją serwera Discord, eventami i kontaktami z graczami.</p>
-            </div>
-            
-            <div class="admin-card">
-                <div class="admin-avatar" style="background-image: url('galejzapfp.jpg');"></div>
-                <div class="admin-name">V-L Galejza</div>
-                <div class="admin-role">Dyrektor Techniczny / Developer</div>
-                <p style="margin-top: 15px;">Odpowiedzialny za kod, skrypty serwerowe i systemy zabezpieczeń.</p>
-            </div>
-            
-            </div>
-        
-        <button onclick="window.location.href='index.html'" class="neumorphism-button" style="margin-top: 50px;">Wyloguj i wróć na stronę główną</button>
+        <button onclick="window.location.href='index.html'" class="neumorphism-button" style="margin-top: 50px;">
+            Wyloguj i wróć na stronę główną
+        </button>
         
     </div>
+
 </body>
 </html>
