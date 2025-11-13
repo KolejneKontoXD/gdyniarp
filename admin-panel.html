@@ -5,27 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administracyjny - Gdynia RP</title>
     
-    <link rel="stylesheet" href="style.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* --- STYLE DEDYKOWANE DLA PANELU ADMINA (Soft UI Layout) --- */
-        
-        /* Nadpisuje domyślne body dla pełnej wysokości */
+        /* ======================================================================
+           ZMIENNE GŁÓWNE I SOFT UI (NEUMORPHISM)
+           ====================================================================== */
+        :root {
+            /* --- KOLORY GŁÓWNE (Ciemny Motyw) --- */
+            --background-color: #1e1e1e; 
+            --component-background: #252525;
+            --primary-color: #7289da; /* Discord Blue/Fiolet */
+            --secondary-color: #f0b432; /* Złoty/żółty dla statystyk */
+            --text-color: #ffffff;
+            --text-color-secondary: #aaaaaa;
+            --card-hover-color: #333333; 
+
+            /* --- CIENIE DLA NEUMORPHISM --- */
+            --shadow-light: 5px 5px 10px rgba(70, 70, 70, 0.5); 
+            --shadow-dark: -5px -5px 10px rgba(0, 0, 0, 0.5); 
+            --inner-shadow-light: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+            --inner-shadow-dark: inset -2px -2px 5px rgba(45, 45, 45, 0.7);
+        }
+
+        /* ======================================================================
+           GLOBALNE STYLE ADMIN PANELU
+           ====================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+        }
+
         body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
             min-height: 100vh;
-            display: flex;
+            display: flex; /* Dodane dla lepszego centrowania */
             flex-direction: column;
             align-items: center;
         }
 
-        /* Kontener centralny, który dostaje efekt Soft UI */
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+
+        /* --- STYLE PASKU NAWIGACJI (NAVBAR) --- */
+        .navbar {
+            width: 100%; /* Rozciągnij na całą szerokość */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: var(--component-background);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color-secondary);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background-color: var(--card-hover-color); 
+        }
+
+        /* --- STYLY NEUMORPHISM OGÓLNE --- */
+        .neumorphism-button {
+            background-color: var(--component-background);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: var(--shadow-dark), var(--shadow-light); 
+            transition: all 0.2s ease;
+            text-decoration: none; 
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .neumorphism-button:hover {
+            box-shadow: var(--inner-shadow-dark), var(--inner-shadow-light); 
+            color: var(--text-color);
+            transform: scale(0.98);
+        }
+
+        .neumorphism-card {
+            padding: 30px;
+            border-radius: 20px;
+            background-color: var(--component-background);
+            box-shadow: var(--shadow-dark), var(--shadow-light); 
+            transition: all 0.3s ease-in-out;
+            text-align: center;
+        }
+
+        .neumorphism-card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        /* --- STYLE DLA ADMIN-PANEL.HTML --- */
         .dashboard-container {
             width: 90%;
             max-width: 1400px;
             margin: 50px auto;
-            padding: 30px;
+            padding: 40px;
             border-radius: 25px;
             box-shadow: var(--shadow-dark), var(--shadow-light);
             background-color: var(--component-background);
@@ -35,35 +151,28 @@
         .dashboard-header {
             color: var(--primary-color);
             margin-bottom: 20px;
-            font-size: 2.5em;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            font-size: 2.8em;
+            font-weight: 800;
         }
 
-        /* Layout dla statystyk */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 30px;
             margin-top: 30px;
         }
-        
+
         .stat-value {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: bold;
-            color: var(--secondary-color);
+            color: var(--secondary-color); 
         }
 
-        /* Sekcja Narzędzi (Bany, Dowody) - wykorzystuje globalną klasę neumorphism-card */
-        .tool-section {
-            text-align: left;
-        }
-
-        /* Stylowanie przycisków narzędzi wewnątrz sekcji (wykorzystuje style z globalnego CSS) */
         .tool-button {
             display: block;
             width: 100%;
             padding: 15px 20px;
-            margin: 10px 0;
+            margin: 15px 0;
             border: none;
             border-radius: 15px;
             font-size: 1.1em;
@@ -72,18 +181,20 @@
             transition: all 0.2s ease-in-out;
             color: var(--text-color);
             background-color: var(--component-background);
-            box-shadow: var(--shadow-dark), var(--shadow-light); /* Soft UI */
+            box-shadow: var(--shadow-dark), var(--shadow-light);
             text-decoration: none;
+            font-weight: 500;
         }
 
         .tool-button:hover {
-            box-shadow: var(--inner-shadow-dark), var(--inner-shadow-light); /* Efekt wciśnięcia */
+            box-shadow: var(--inner-shadow-dark), var(--inner-shadow-light);
             color: var(--primary-color);
         }
 
         .tool-button i {
             margin-right: 15px;
             font-size: 1.2em;
+            color: var(--primary-color);
         }
     </style>
     
@@ -93,7 +204,7 @@
     <nav class="navbar">
         <div class="nav-logo">GDYNIA RP</div>
         <div class="nav-links">
-            <a href="login.html" class="nav-link">🔑 LOGOWANIE</a>
+            <a href="login.html" class="nav-link">🔑 LOGOWANIE</a> 
             <a href="index.html" class="nav-link">🏠 START</a>
             <a href="factions.html" class="nav-link">👮 FRAKCJE</a>
             <a href="admin.html" class="nav-link">⭐ ADMIN</a> 
