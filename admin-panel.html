@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administracyjny Gdynia RP</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS DEDYKOWANY DLA PANELU ADMINA (Neumorphism i layout) */
+        
+        body {
+            background-color: var(--background-color); /* Używa koloru tła z globalnego style.css */
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .admin-card {
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-dark), var(--shadow-light); /* Ciemny i jasny cień dla efektu Neumorphism */
+            background-color: var(--component-background);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .admin-card:hover {
+            box-shadow: var(--inner-shadow-dark), var(--inner-shadow-light); /* Wklęsły cień przy najechaniu */
+            transform: translateY(-2px);
+        }
+
+        .admin-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 5px solid var(--primary-color);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .admin-name {
+            font-size: 1.5em;
+            margin: 5px 0;
+            color: var(--primary-color);
+        }
+
+        .admin-role {
+            font-size: 1em;
+            color: var(--text-color-secondary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        </header>
+
+    <div class="container">
+        <h1>PANEL ADMINISTRACYJNY Gdynia RP</h1>
+        <p>Witaj, zweryfikowany administratorze! Poniżej znajduje się lista członków ekipy.</p>
+        
+        <div class="admin-grid">
+
+            <div class="admin-card">
+                <div class="admin-avatar" style="background-image: url('mcpfp - oskubanybratku.png');"></div>
+                <div class="admin-name">Oskubany</div>
+                <div class="admin-role">Właściciel / Główny Administrator</div>
+                <p style="margin-top: 15px;">Odpowiedzialny za wizję, rozwój i finanse projektu.</p>
+            </div>
+
+            <div class="admin-card">
+                <div class="admin-avatar" style="background-image: url('qulekpfp.jpg');"></div>
+                <div class="admin-name">Qulek</div>
+                <div class="admin-role">Administrator Społeczności</div>
+                <p style="margin-top: 15px;">Zajmuje się moderacją serwera Discord, eventami i kontaktami z graczami.</p>
+            </div>
+            
+            <div class="admin-card">
+                <div class="admin-avatar" style="background-image: url('galejzapfp.jpg');"></div>
+                <div class="admin-name">V-L Galejza</div>
+                <div class="admin-role">Dyrektor Techniczny / Developer</div>
+                <p style="margin-top: 15px;">Odpowiedzialny za kod, skrypty serwerowe i systemy zabezpieczeń.</p>
+            </div>
+            
+            </div>
+        
+        <button onclick="window.location.href='index.html'" class="neumorphism-button" style="margin-top: 50px;">Wyloguj i wróć na stronę główną</button>
+        
+    </div>
+</body>
+</html>
