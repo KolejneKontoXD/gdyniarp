@@ -16,7 +16,7 @@ const PANEL_URI = `${REDIRECT_URI_BASE}/admin-panel.html`; // DOCELOWY PANEL
 // Lista ID Użytkowników Discorda, którzy mają dostęp
 // Wklej tutaj ID konta @oskubny, @Qułek_PL, @V-L galejza itp.
 const AUTHORIZED_USER_IDS = [
-    "123456789012345678", // Przykład ID Discorda (Zmień!)
+    "1434253936600289302", // Przykład ID Discorda (Zmień!)
     "987654321098765432"  // Dodaj kolejne ID administracji
 ];
 
