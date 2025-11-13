@@ -8,29 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* ======================================================================
-           ZMIENNE GŁÓWNE I SOFT UI (NEUMORPHISM)
-           ====================================================================== */
+        /* [Tu jest cały Twój kod CSS z poprzedniego kroku] */
+        /* Ten blok CSS jest bardzo duży, więc pomijam go w celu czytelności,
+           ale zakłada, że wkleiłeś go w całości w poprzednim kroku! */
+
         :root {
-            /* --- KOLORY GŁÓWNE (Ciemny Motyw) --- */
             --background-color: #1e1e1e; 
             --component-background: #252525;
-            --primary-color: #7289da; /* Discord Blue/Fiolet */
-            --secondary-color: #f0b432; /* Złoty/żółty dla statystyk */
+            --primary-color: #7289da;
+            --secondary-color: #f0b432;
             --text-color: #ffffff;
             --text-color-secondary: #aaaaaa;
             --card-hover-color: #333333; 
-
-            /* --- CIENIE DLA NEUMORPHISM --- */
             --shadow-light: 5px 5px 10px rgba(70, 70, 70, 0.5); 
             --shadow-dark: -5px -5px 10px rgba(0, 0, 0, 0.5); 
             --inner-shadow-light: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
             --inner-shadow-dark: inset -2px -2px 5px rgba(45, 45, 45, 0.7);
         }
-
-        /* ======================================================================
-           GLOBALNE STYLE ADMIN PANELU
-           ====================================================================== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -43,7 +37,7 @@
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
             min-height: 100vh;
-            display: flex; /* Dodane dla lepszego centrowania */
+            display: flex;
             flex-direction: column;
             align-items: center;
         }
@@ -52,9 +46,8 @@
             font-weight: 700;
         }
 
-        /* --- STYLE PASKU NAWIGACJI (NAVBAR) --- */
         .navbar {
-            width: 100%; /* Rozciągnij na całą szerokość */
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -93,7 +86,20 @@
             background-color: var(--card-hover-color); 
         }
 
-        /* --- STYLY NEUMORPHISM OGÓLNE --- */
+        .theme-toggle {
+            width: 30px;
+            height: 30px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow-dark), var(--shadow-light);
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            box-shadow: var(--inner-shadow-dark), var(--inner-shadow-light);
+        }
+
         .neumorphism-button {
             background-color: var(--component-background);
             color: var(--primary-color);
@@ -136,7 +142,6 @@
             font-weight: 700;
         }
 
-        /* --- STYLE DLA ADMIN-PANEL.HTML --- */
         .dashboard-container {
             width: 90%;
             max-width: 1400px;
@@ -242,25 +247,25 @@
                 <h2 class="card-title">NARZĘDZIA ZARZĄDZANIA RP</h2>
                 
                 <h3 style="margin-top: 20px; color: var(--text-color);">Zarządzanie Banami</h3>
-                <a href="#" class="tool-button">
-                    <i class="fas fa-hammer"></i> Nałóż Nowego Bana
+                <a href="https://docs.google.com/forms/u/0/create?usp=drive_web" target="_blank" class="tool-button">
+                    <i class="fas fa-hammer"></i> Nałóż Nowego Bana **(ZMIEN NA SWÓJ FORMULARZ)**
                 </a>
-                <a href="#" class="tool-button">
-                    <i class="fas fa-list-alt"></i> Lista Aktywnych Banów
+                <a href="https://docs.google.com/spreadsheets/u/0/create" target="_blank" class="tool-button">
+                    <i class="fas fa-list-alt"></i> Lista Aktywnych Banów **(ZMIEN NA SWOJ ARKUSZ)**
                 </a>
-                <a href="#" class="tool-button">
-                    <i class="fas fa-user-check"></i> Wyszukaj Gracza po ID/Nicku
+                <a href="https://discord.com/channels/@me" target="_blank" class="tool-button">
+                    <i class="fas fa-user-check"></i> Wyszukaj Gracza po ID/Nicku **(ZMIEN NA SWOJ SYSTEM)**
                 </a>
 
                 <h3 style="margin-top: 30px; color: var(--text-color);">Zarządzanie Zgłoszeniami i Dowodami</h3>
-                <a href="#" class="tool-button">
-                    <i class="fas fa-file-alt"></i> Przejrzyj Nowe Zgłoszenia
+                <a href="https://trello.com/b/gT6P0WwE/przykladowa-tablica-zgloszen" target="_blank" class="tool-button">
+                    <i class="fas fa-file-alt"></i> Przejrzyj Nowe Zgłoszenia **(ZMIEN NA SWOJE TRELLO/FORUM)**
                 </a>
-                <a href="#" class="tool-button">
-                    <i class="fas fa-upload"></i> Wgraj Dowód do Bazy Danych
+                <a href="https://drive.google.com/drive/u/0/my-drive" target="_blank" class="tool-button">
+                    <i class="fas fa-upload"></i> Wgraj Dowód do Bazy Danych **(ZMIEN NA SWOJ GOOGLE DRIVE)**
                 </a>
-                <a href="#" class="tool-button">
-                    <i class="fas fa-history"></i> Logi Administratorów
+                <a href="https://discord.com/channels/TwojSerwerID/TwojKanalID" target="_blank" class="tool-button">
+                    <i class="fas fa-history"></i> Logi Administratorów **(ZMIEN NA SWOJ KANAL DISCORD)**
                 </a>
             </div>
         </div>
