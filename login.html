@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administracyjny - Logowanie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Zmienne CSS dla Trybów Ciemny/Jasny */
+        :root {
+            --bg-color: #E0E5EC; /* Jasne tło */
+            --text-color: #333333;
+            --accent-color: #4C76FF;
+            --card-color: #E0E5EC;
+            --shadow-light: #f7ffff;
+            --shadow-dark: #c9cfd6;
+            --discord-color: #5865F2; /* Kolor Discorda */
+        }
+
+        /* Tryb Ciemny */
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #E6E6E6;
+            --accent-color: #4C76FF;
+            --card-color: #272727;
+            --shadow-light: #303030;
+            --shadow-dark: #111111;
+        }
+
+        /* GLOBALNE STYLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .login-container {
+            width: 90%;
+            max-width: 400px;
+            padding: 40px;
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+            text-align: center;
+        }
+
+        .login-container h2 {
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+        }
+
+        .discord-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 15px 25px;
+            background-color: var(--discord-color);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .discord-btn:hover {
+            background-color: #4A56E2;
+        }
+
+        .discord-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+
+        .error-message {
+            color: #F44336;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>PANEL ADMINISTRACYJNY</h2>
+        <p>Logowanie jest możliwe tylko dla uprawnionych członków administracji Gdynia RP.</p>
+        
+        <button id="discord-login-btn" class="discord-btn">
+            <span class="discord-icon">👾</span> Zaloguj się przez Discord
+        </button>
+
+        <p id="error-msg" class="error-message" style="display: none;"></p>
+    </div>
+
+    <script>
+        // Funkcja do przełączania trybu ciemnego (przenieś z poprzednich plików)
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+            }
+            // UWAGA: Nie musimy umieszczać tu przełącznika, bo to strona logowania.
+        });
+
+
+        // UWAGA: Ta stała MUSI być taka sama jak nazwa folderu Netlify Function, np. 'discord-auth'
+        const AUTH_FUNCTION_NAME = 'discord-auth'; 
+        const API_BASE_URL = window.location.origin;
+
+        document.getElementById('discord-login-btn').addEventListener('click', () => {
+            // Przekierowanie do endpointu logowania (który utworzymy w Netlify Function)
+            window.location.href = `${API_BASE_URL}/.netlify/functions/${AUTH_FUNCTION_NAME}`;
+        });
+
+        // Obsługa błędów autoryzacji
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        if (error === 'denied') {
+            document.getElementById('error-msg').textContent = 'Anulowano autoryzację Discord. Spróbuj ponownie.';
+            document.getElementById('error-msg').style.display = 'block';
+        } else if (error === 'unauthorized') {
+            document.getElementById('error-msg').textContent = 'Brak dostępu. Twoje konto Discord nie należy do administracji.';
+            document.getElementById('error-msg').style.display = 'block';
+        }
+        
+    </script>
+</body>
+</html>
